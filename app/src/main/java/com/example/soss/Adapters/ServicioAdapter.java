@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.soss.Clases.ClsServicio;
 import com.example.soss.DetalleServicio;
 import com.example.soss.R;
+import com.example.soss.UbicacionServicio;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,9 +47,11 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(micontext, DetalleServicio.class);
+                Intent intent = new Intent(micontext, UbicacionServicio.class);
                 //intent.putExtra("id", datos.get(i).getId());
                 intent.putExtra("Nombre", datos.get(i).getNombre());
+                intent.putExtra("Latitud", datos.get(i).getLatitud());
+                intent.putExtra("Longitud", datos.get(i).getLongitud());
                 micontext.startActivity(intent);
             }
         });

@@ -3,7 +3,7 @@ package com.example.soss.Clases;
 public class ClsServicio {
     private String id;
     private String Nombre;
-    private double Latidud;
+    private double Latitud;
     private double Longitud;
 
     public ClsServicio() {
@@ -30,12 +30,12 @@ public class ClsServicio {
         Nombre = nombre;
     }
 
-    public double getLatidud() {
-        return Latidud;
+    public double getLatitud() {
+        return Latitud;
     }
 
-    public void setLatidud(double latidud) {
-        Latidud = latidud;
+    public void setLatitud(double latitud) {
+        Latitud = latitud;
     }
 
     public double getLongitud() {

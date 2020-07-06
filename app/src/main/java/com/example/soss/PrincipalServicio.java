@@ -93,12 +93,12 @@ public class PrincipalServicio extends AppCompatActivity {
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Toast.makeText(PrincipalServicio.this, "Se movio el producto", Toast.LENGTH_LONG).show();
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(PrincipalServicio.this, "Transaccion cancelada", Toast.LENGTH_LONG).show();
+
             }
         });
     }
