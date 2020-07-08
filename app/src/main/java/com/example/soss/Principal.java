@@ -53,6 +53,9 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
             case R.id.activity_acerca:
                 startActivity(new Intent(this, Login.class));
                 break;
+            case R.id.activity_categoria:
+                startActivity(new Intent(this, CategoriaUsuario.class));
+                break;
             case R.id.nav_salir:
                 finish();
                 break;

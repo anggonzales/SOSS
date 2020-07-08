@@ -54,7 +54,7 @@ public class Slider extends AppCompatActivity {
                 if(next < mDots.length){
                     viewPager.setCurrentItem(next);
                 }else {
-                    Intent intent = new Intent(Slider.this, Principal.class);
+                    Intent intent = new Intent(Slider.this, CategoriaUsuario.class);
                     startActivity(intent);
                     finish();
                 }

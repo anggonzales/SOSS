@@ -44,10 +44,10 @@ public class PrincipalServicio extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        AddItems();
+        ListarEmpresa();
     }
 
-    void AddItems() {
+    void ListarEmpresa() {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
