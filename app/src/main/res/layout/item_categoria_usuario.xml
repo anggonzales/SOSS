@@ -8,12 +8,23 @@
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground">
 
-    <CheckBox
-        android:id="@+id/chkCategoria"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/txtNombreCategoria"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="30dp"
         android:text="Informática"
         android:textSize="16dp"
         app:useMaterialThemeColors="true" />
+
+    <CheckBox
+            android:id="@+id/chkCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

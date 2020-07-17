@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -32,17 +33,17 @@ public class CategoriaUsuario extends AppCompatActivity {
     private ClsCategoria[] categorias;
     private static final String PATH_CATEGORIA = "Categoria";
     DatabaseReference reference;
-    ArrayList<String> ServiciosCheck = new ArrayList<String>();
-    private Button check;
-
+    private Button Guardar;
+    StringBuffer sb = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria_usuario);
         recyclerView = findViewById(R.id.rcvListaCategorias);
-        check = (Button) findViewById(R.id.btnGuardar);
+        Guardar = (Button) findViewById(R.id.btnGuardar);
         reference = FirebaseDatabase.getInstance().getReference(PATH_CATEGORIA);
+
         misdatos = new ArrayList<>();
         adaptador = new CategoriaAdapter(this, misdatos);
         recyclerView.setAdapter(adaptador);
@@ -50,13 +51,11 @@ public class CategoriaUsuario extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         ListarCategorias();
-
-        check.setOnClickListener(new View.OnClickListener() {
+        Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(ClsCategoria cat : misdatos){
+                sb = new StringBuffer();
 
-                }
             }
         });
     }
@@ -122,4 +121,6 @@ public class CategoriaUsuario extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 }

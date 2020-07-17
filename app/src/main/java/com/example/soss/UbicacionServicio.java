@@ -49,12 +49,10 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
     List<LatLng> latLngList = new ArrayList<>();
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
-    public double longitude = 0.0;
-    public double latitude = 0.0;
-    LatLng latLng = new LatLng(latitude, longitude);
-    Double latitudservicio;
-    Double longitudservicio;
-    private double wayLatitude = 0.0, wayLongitude = 0.0;
+    String latitudservicio;
+    String longitudservicio;
+    private double wayLatitude = 0.0;
+    private double wayLongitude = 0.0;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
@@ -71,22 +69,24 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
         request = Volley.newRequestQueue(getApplicationContext());
 
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if ((ContextCompat.checkSelfPermission(UbicacionServicio.this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
         } else {
-            solicitarPermiso(Manifest.permission.ACCESS_FINE_LOCATION,
-                    "Sin el permiso" + " de ubicacion no podremos localizarte", 1);
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                solicitarPermiso(Manifest.permission.ACCESS_FINE_LOCATION,
+                        "Sin el permiso" + " de ubicación no podremos localizarte", 1);
+            }
         }
 
         Bundle extras = getIntent().getExtras();
-        latitudservicio = extras.getDouble("Latitud");
-        longitudservicio = extras.getDouble("Longitud");
+        latitudservicio =  extras.getString("Latitud");
+        longitudservicio = extras.getString("Longitud");
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(10 * 1000);
-        locationRequest.setFastestInterval(5 * 1000);
+
 
         UbicacionServicio.this.getLocation();
     }
@@ -144,7 +144,7 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
 
     private void webServiceObtenerRuta(String latitudInicial, String longitudInicial, String latitudFinal, String longitudFinal) {
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + latitudInicial + "," + longitudInicial
-                + "&destination=" + latitudFinal + "," + longitudFinal + "&key=AIzaSyDJlUDWMozOEkTVeSRAW6vdEjUWM0evkaw";
+                + "&destination=" + latitudFinal + "," + longitudFinal + "&key=AIzaSyBdx5zxdh_jmhC_7H4tMrK-YeiQDlD-OG8";
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

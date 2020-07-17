@@ -2,9 +2,10 @@ package com.example.soss.Clases;
 
 public class ClsServicio {
     private String id;
+    private String IdServicio;
+    private String IdEmpresa;
     private String Nombre;
-    private double Latitud;
-    private double Longitud;
+    private String Precio;
 
     public ClsServicio() {
     }
@@ -22,6 +23,22 @@ public class ClsServicio {
         this.id = id;
     }
 
+    public String getIdServicio() {
+        return IdServicio;
+    }
+
+    public void setIdServicio(String idServicio) {
+        IdServicio = idServicio;
+    }
+
+    public String getIdEmpresa() {
+        return IdEmpresa;
+    }
+
+    public void setIdEmpresa(String idEmpresa) {
+        IdEmpresa = idEmpresa;
+    }
+
     public String getNombre() {
         return Nombre;
     }
@@ -30,19 +47,11 @@ public class ClsServicio {
         Nombre = nombre;
     }
 
-    public double getLatitud() {
-        return Latitud;
+    public String getPrecio() {
+        return Precio;
     }
 
-    public void setLatitud(double latitud) {
-        Latitud = latitud;
-    }
-
-    public double getLongitud() {
-        return Longitud;
-    }
-
-    public void setLongitud(double longitud) {
-        Longitud = longitud;
+    public void setPrecio(String precio) {
+        Precio = precio;
     }
 }

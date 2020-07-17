@@ -20,6 +20,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
 
     private LayoutInflater inflador;
     ArrayList<ClsCategoria> datos;
+    ArrayList<ClsCategoria> ListaCategoriaUsuario = new ArrayList<>();
     Context micontext;
 
     public CategoriaAdapter(Context context, ArrayList<ClsCategoria> datos) {
@@ -37,21 +38,9 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
 
     @Override
     public void onBindViewHolder(CategoriaAdapter.ViewHolder holder, final int i) {
-        //ClsServicio objServicio = datos.get(i);
-        holder.NombreCategoria.setText(datos.get(i).getNombre());
-        //String Inicial = objServicio.getNombre().toUpperCase().substring(0, 1);
-        //holder.InicialLogo.setText(Inicial);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Intent intent = new Intent(micontext, UbicacionServicio.class);
-                //intent.putExtra("id", datos.get(i).getId());
-                intent.putExtra("Nombre", datos.get(i).getNombre());
-                intent.putExtra("Latitud", datos.get(i).getLatitud());
-                intent.putExtra("Longitud", datos.get(i).getLongitud());
-                micontext.startActivity(intent);*/
-            }
-        });
+
+        holder.Categorias.setText(datos.get(i).getNombre());
+
     }
 
     @Override
@@ -61,10 +50,17 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CheckBox NombreCategoria;
+        public TextView Categorias;
 
         ViewHolder(View itemView) {
             super(itemView);
             NombreCategoria = (CheckBox) itemView.findViewById(R.id.chkCategoria);
+            Categorias = (TextView) itemView.findViewById(R.id.txtNombreCategoria);
+
         }
+    }
+
+    interface OnItemCheckListener {
+        void onItemCheck(View v, int pos);
     }
 }

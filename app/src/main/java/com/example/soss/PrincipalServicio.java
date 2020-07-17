@@ -8,17 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.soss.Adapters.ServicioAdapter;
-import com.example.soss.Clases.ClsServicio;
+import com.example.soss.Adapters.EmpresaAdapter;
+import com.example.soss.Clases.ClsEmpresa;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,9 +23,9 @@ public class PrincipalServicio extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ServicioAdapter adaptador;
-    private ArrayList<ClsServicio> misdatos;
-    private static final String PATH_SERVICIO = "Servicio";
+    private EmpresaAdapter adaptador;
+    private ArrayList<ClsEmpresa> misdatos;
+    private static final String PATH_SERVICIO = "Empresa";
     DatabaseReference reference;
 
     @Override
@@ -39,7 +36,7 @@ public class PrincipalServicio extends AppCompatActivity {
         recyclerView = findViewById(R.id.rcvListaServicios);
         reference = FirebaseDatabase.getInstance().getReference(PATH_SERVICIO);
         misdatos = new ArrayList<>();
-        adaptador = new ServicioAdapter(this, misdatos);
+        adaptador = new EmpresaAdapter(this, misdatos);
         recyclerView.setAdapter(adaptador);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -51,8 +48,8 @@ public class PrincipalServicio extends AppCompatActivity {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ClsServicio servicio = dataSnapshot.getValue(ClsServicio.class);
-                servicio.setId(dataSnapshot.getKey());
+                ClsEmpresa servicio = dataSnapshot.getValue(ClsEmpresa.class);
+                servicio.setIdEmpresa(dataSnapshot.getKey());
                 if (!misdatos.contains(servicio)) {
                     misdatos.add(servicio);
                 }
@@ -61,13 +58,13 @@ public class PrincipalServicio extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ClsServicio servicio = dataSnapshot.getValue(ClsServicio.class);
-                servicio.setId(dataSnapshot.getKey());
+                ClsEmpresa servicio = dataSnapshot.getValue(ClsEmpresa.class);
+                servicio.setIdEmpresa(dataSnapshot.getKey());
                 int index = -1;
-                for (ClsServicio servi : misdatos) {
-                    Log.i("iteracion", servi.getId() + " = " + servicio.getId());
+                for (ClsEmpresa servi : misdatos) {
+                    Log.i("iteracion", servi.getIdEmpresa() + " = " + servicio.getIdEmpresa());
                     index++;
-                    if (servi.getId().equals(servicio.getId())) {
+                    if (servi.getIdEmpresa().equals(servicio.getIdEmpresa())) {
                         misdatos.set(index, servicio);
                         break;
                     }
@@ -77,13 +74,13 @@ public class PrincipalServicio extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                ClsServicio servicio = dataSnapshot.getValue(ClsServicio.class);
-                servicio.setId(dataSnapshot.getKey());
+                ClsEmpresa servicio = dataSnapshot.getValue(ClsEmpresa.class);
+                servicio.setIdEmpresa(dataSnapshot.getKey());
                 int index = -1;
-                for (ClsServicio servi : misdatos) {
-                    Log.i("iteracion", servi.getId() + " = " + servicio.getId());
+                for (ClsEmpresa servi : misdatos) {
+                    Log.i("iteracion", servi.getIdEmpresa() + " = " + servicio.getIdEmpresa());
                     index++;
-                    if (servi.getId().equals(servicio.getId())) {
+                    if (servi.getIdEmpresa().equals(servicio.getIdEmpresa())) {
                         misdatos.remove(index);
                         break;
                     }
