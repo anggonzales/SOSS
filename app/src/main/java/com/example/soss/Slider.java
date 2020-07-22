@@ -16,12 +16,12 @@ import com.example.soss.Adapters.SlideAdapter;
 
 public class Slider extends AppCompatActivity {
 
-    private ViewPager viewPager;
-    private SlideAdapter myadapter;
+    private ViewPager VistaPagina;
+    private SlideAdapter AdaptadorSlider;
     private LinearLayout dostsLayout;
-    private TextView[] mDots;
-    private Button btnBack;
-    private Button btnNext;
+    private TextView[] NumeroPuntos;
+    private Button btnAtras;
+    private Button btnSiguiente;
     private int mCurrentPage;
 
     @Override
@@ -29,30 +29,30 @@ public class Slider extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider);
 
-        viewPager = (ViewPager) findViewById(R.id.vprSlider);
+        VistaPagina = (ViewPager) findViewById(R.id.vprSlider);
         dostsLayout = (LinearLayout) findViewById(R.id.layoutDots);
 
-        btnBack = (Button) findViewById(R.id.btnBack);
-        btnNext = (Button) findViewById(R.id.btnNext);
+        btnAtras = (Button) findViewById(R.id.btnBack);
+        btnSiguiente = (Button) findViewById(R.id.btnNext);
 
-        myadapter = new SlideAdapter(this);
-        viewPager.setAdapter(myadapter);
+        AdaptadorSlider = new SlideAdapter(this);
+        VistaPagina.setAdapter(AdaptadorSlider);
         addDotsIndicator(0);
-        viewPager.addOnPageChangeListener(viewListener);
+        VistaPagina.addOnPageChangeListener(viewListener);
 
-        btnBack.setOnClickListener(new View.OnClickListener(){
+        btnAtras.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                viewPager.setCurrentItem(mCurrentPage - 1);
+                VistaPagina.setCurrentItem(mCurrentPage - 1);
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener(){
+        btnSiguiente.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 int next = getItem(+1);
-                if(next < mDots.length){
-                    viewPager.setCurrentItem(next);
+                if(next < NumeroPuntos.length){
+                    VistaPagina.setCurrentItem(next);
                 }else {
                     Intent intent = new Intent(Slider.this, CategoriaUsuario.class);
                     startActivity(intent);
@@ -63,24 +63,24 @@ public class Slider extends AppCompatActivity {
     }
 
     public void addDotsIndicator(int position){
-        mDots = new TextView[4];
+        NumeroPuntos = new TextView[4];
         dostsLayout.removeAllViews();
 
-        for(int i = 0; i< mDots.length; i++){
-            mDots[i] = new TextView(this);
-            mDots[i].setText(Html.fromHtml("&#8226;"));
-            mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.colorTransparenteWhite));
-            dostsLayout.addView(mDots[i]);
+        for(int i = 0; i< NumeroPuntos.length; i++){
+            NumeroPuntos[i] = new TextView(this);
+            NumeroPuntos[i].setText(Html.fromHtml("&#8226;"));
+            NumeroPuntos[i].setTextSize(35);
+            NumeroPuntos[i].setTextColor(getResources().getColor(R.color.colorTransparenteWhite));
+            dostsLayout.addView(NumeroPuntos[i]);
         }
 
-        if(mDots.length > 0){
-            mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
+        if(NumeroPuntos.length > 0){
+            NumeroPuntos[position].setTextColor(getResources().getColor(R.color.colorWhite));
         }
     }
 
     private int getItem(int i){
-        return viewPager.getCurrentItem() + i;
+        return VistaPagina.getCurrentItem() + i;
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
@@ -93,19 +93,19 @@ public class Slider extends AppCompatActivity {
         public void onPageSelected(int i) {
             addDotsIndicator(i);
             mCurrentPage = i;
-            if(i == mDots.length - 1){
-                btnNext.setEnabled(true);
-                btnBack.setEnabled(true);
-                btnBack.setVisibility(View.VISIBLE);
-                btnNext.setText("Finish");
-                btnBack.setText("Back");
+            if(i == NumeroPuntos.length - 1){
+                btnSiguiente.setEnabled(true);
+                btnAtras.setEnabled(true);
+                btnAtras.setVisibility(View.VISIBLE);
+                btnSiguiente.setText("Finalizar");
+                btnAtras.setText("Back");
 
             } else {
-                btnNext.setEnabled(true);
-                btnBack.setEnabled(true);
-                btnBack.setVisibility(View.VISIBLE);
-                btnNext.setText("Next");
-                btnBack.setText("Back");
+                btnSiguiente.setEnabled(true);
+                btnAtras.setEnabled(true);
+                btnAtras.setVisibility(View.VISIBLE);
+                btnSiguiente.setText("Next");
+                btnAtras.setText("Back");
             }
         }
 

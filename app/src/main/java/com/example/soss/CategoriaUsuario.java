@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -14,8 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.soss.Adapters.CategoriaAdapter;
-import com.example.soss.Clases.ClsCategoria;
-import com.example.soss.Clases.ClsCategoriaUsuario;
+import com.example.soss.Model.ClsCategoria;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,33 +26,32 @@ public class CategoriaUsuario extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private CategoriaAdapter adaptador;
-    private ArrayList<ClsCategoria> misdatos;
-    private ClsCategoria[] categorias;
+    private CategoriaAdapter AdaptadorCategoria;
+    private ArrayList<ClsCategoria> ListaCategorias;
+
     private static final String PATH_CATEGORIA = "Categoria";
     DatabaseReference reference;
-    private Button Guardar;
-    StringBuffer sb = null;
+    private Button btnGuardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria_usuario);
         recyclerView = findViewById(R.id.rcvListaCategorias);
-        Guardar = (Button) findViewById(R.id.btnGuardar);
+        btnGuardar = (Button) findViewById(R.id.btnGuardar);
+
         reference = FirebaseDatabase.getInstance().getReference(PATH_CATEGORIA);
 
-        misdatos = new ArrayList<>();
-        adaptador = new CategoriaAdapter(this, misdatos);
-        recyclerView.setAdapter(adaptador);
+        ListaCategorias = new ArrayList<>();
+        AdaptadorCategoria = new CategoriaAdapter(this, ListaCategorias);
+        recyclerView.setAdapter(AdaptadorCategoria);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         ListarCategorias();
-        Guardar.setOnClickListener(new View.OnClickListener() {
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sb = new StringBuffer();
 
             }
         });
@@ -66,8 +63,8 @@ public class CategoriaUsuario extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ClsCategoria categoria = dataSnapshot.getValue(ClsCategoria.class);
                 categoria.setId(dataSnapshot.getKey());
-                if (!misdatos.contains(categoria)) {
-                    misdatos.add(categoria);
+                if (!ListaCategorias.contains(categoria)) {
+                    ListaCategorias.add(categoria);
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
@@ -77,11 +74,11 @@ public class CategoriaUsuario extends AppCompatActivity {
                 ClsCategoria categoria = dataSnapshot.getValue(ClsCategoria.class);
                 categoria.setId(dataSnapshot.getKey());
                 int index = -1;
-                for (ClsCategoria cat : misdatos) {
-                    Log.i("iteracion", cat.getId() + " = " + cat.getId());
+                for (ClsCategoria objcategoria : ListaCategorias) {
+                    Log.i("iteracion", objcategoria.getId() + " = " + categoria.getId());
                     index++;
-                    if (cat.getId().equals(cat.getId())) {
-                        misdatos.set(index, cat);
+                    if (objcategoria.getId().equals(categoria.getId())) {
+                        ListaCategorias.set(index, categoria);
                         break;
                     }
                 }
@@ -93,11 +90,11 @@ public class CategoriaUsuario extends AppCompatActivity {
                 ClsCategoria categoria = dataSnapshot.getValue(ClsCategoria.class);
                 categoria.setId(dataSnapshot.getKey());
                 int index = -1;
-                for (ClsCategoria cat : misdatos) {
-                    Log.i("iteracion", cat.getId() + " = " + cat.getId());
+                for (ClsCategoria objcategoria : ListaCategorias) {
+                    Log.i("iteracion", objcategoria.getId() + " = " + categoria.getId());
                     index++;
-                    if (cat.getId().equals(cat.getId())) {
-                        misdatos.set(index, cat);
+                    if (objcategoria.getId().equals(categoria.getId())) {
+                        ListaCategorias.set(index, categoria);
                         break;
                     }
                 }
@@ -121,6 +118,4 @@ public class CategoriaUsuario extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-
 }

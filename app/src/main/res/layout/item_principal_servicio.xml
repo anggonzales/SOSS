@@ -11,13 +11,12 @@
     <TextView
             android:id="@+id/txtLogo"
             android:layout_width="48dp"
-            android:layout_margin="16dp"
+            android:layout_margin="15dp"
             android:layout_height="48dp"
             android:background="@drawable/logo"
             android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:textSize="15sp"
             tools:text="L" />
 
     <TextView

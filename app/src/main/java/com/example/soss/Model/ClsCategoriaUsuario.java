@@ -1,4 +1,4 @@
-package com.example.soss.Clases;
+package com.example.soss.Model;
 
 public class ClsCategoriaUsuario {
     private String Id;

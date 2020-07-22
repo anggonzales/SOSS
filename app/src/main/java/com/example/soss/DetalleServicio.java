@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.soss.Adapters.ServicioAdapter;
-import com.example.soss.Clases.ClsServicio;
+import com.example.soss.Model.ClsServicio;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +29,7 @@ public class DetalleServicio extends AppCompatActivity {
     private static final String PATH_SERVICIOS = "Servicio";
     FirebaseDatabase database;
     DatabaseReference reference;
-    Query query;
+    Query consulta;
     String IdEmpresa = "";
 
 
@@ -50,16 +50,16 @@ public class DetalleServicio extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         IdEmpresa =  extras.getString("IdEmpresa");
 
-        query = FirebaseDatabase.getInstance().getReference("Servicio")
+        consulta = FirebaseDatabase.getInstance().getReference("Servicio")
                 .orderByChild("IdEmpresa")
                 .equalTo(IdEmpresa);
 
-        Consultaquery();
+        ListarServicios();
 
     }
 
-    void Consultaquery(){
-        query.addChildEventListener(new ChildEventListener() {
+    void ListarServicios(){
+        consulta.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ClsServicio servicio = dataSnapshot.getValue(ClsServicio.class);
@@ -75,10 +75,10 @@ public class DetalleServicio extends AppCompatActivity {
                 ClsServicio servicio = dataSnapshot.getValue(ClsServicio.class);
                 servicio.setIdServicio(dataSnapshot.getKey());
                 int index = -1;
-                for (ClsServicio serv : ListaServicios) {
-                    Log.i("iteracion", serv.getIdServicio() + " = " + servicio.getIdServicio());
+                for (ClsServicio objservicio : ListaServicios) {
+                    Log.i("iteracion", objservicio.getIdServicio() + " = " + servicio.getIdServicio());
                     index++;
-                    if (serv.getIdServicio().equals(servicio.getIdServicio())) {
+                    if (objservicio.getIdServicio().equals(servicio.getIdServicio())) {
                         ListaServicios.set(index, servicio);
                         break;
                     }
@@ -88,7 +88,18 @@ public class DetalleServicio extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                ClsServicio servicio = dataSnapshot.getValue(ClsServicio.class);
+                servicio.setIdServicio(dataSnapshot.getKey());
+                int index = -1;
+                for (ClsServicio objservicio : ListaServicios) {
+                    Log.i("iteracion", objservicio.getIdServicio() + " = " + servicio.getIdServicio());
+                    index++;
+                    if (objservicio.getIdServicio().equals(servicio.getIdServicio())) {
+                        ListaServicios.remove(index);
+                        break;
+                    }
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
             }
 
             @Override

@@ -46,17 +46,16 @@ import java.util.List;
 
 public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap mapa;
-    List<LatLng> latLngList = new ArrayList<>();
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
     String latitudservicio;
     String longitudservicio;
-    private double wayLatitude = 0.0;
-    private double wayLongitude = 0.0;
+    private double MiLatitude = 0.0;
+    private double MiLongitude = 0.0;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
-    Polyline polyline2 = null;
+    Polyline polyline = null;
     private boolean isContinue = false;
 
     @Override
@@ -87,7 +86,6 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationRequest = LocationRequest.create();
 
-
         UbicacionServicio.this.getLocation();
     }
 
@@ -99,8 +97,8 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
                 @Override
                 public void onSuccess(Location location) {
                     if (location != null) {
-                        wayLatitude = location.getLatitude();
-                        wayLongitude = location.getLongitude();
+                        MiLatitude = location.getLatitude();
+                        MiLongitude = location.getLongitude();
                     } else {
                         mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
                     }
@@ -110,10 +108,10 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
     }
 
     public void ObtenerRuta(View view) {
-        Log.i("milocalizacion", "lat:" + wayLatitude + " lon:" + wayLongitude);
+        Log.i("milocalizacion", "lat:" + MiLatitude + " lon:" + MiLongitude);
         Log.i("localizacionservicio", "lat:" + latitudservicio + " lon:" + longitudservicio);
-        String latinicial = String.valueOf(wayLatitude);
-        String loninicial = String.valueOf(wayLongitude);
+        String latinicial = String.valueOf(MiLatitude);
+        String loninicial = String.valueOf(MiLongitude);
         String latfinal = String.valueOf(latitudservicio);
         String lonfinal = String.valueOf(longitudservicio);
         webServiceObtenerRuta(latinicial, loninicial, latfinal, lonfinal);
@@ -135,11 +133,11 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
 
     public void DecodePolyline(String encodepolyline) {
         List<LatLng> list = PolyUtil.decode(encodepolyline);
-        if (polyline2 != null) polyline2.remove();
+        if (polyline != null) polyline.remove();
         PolylineOptions polylineOptions = new PolylineOptions()
                 .addAll(list).clickable(true);
-        polyline2 = mapa.addPolyline(polylineOptions);
-        polyline2.setColor(Color.BLUE);
+        polyline = mapa.addPolyline(polylineOptions);
+        polyline.setColor(Color.BLUE);
     }
 
     private void webServiceObtenerRuta(String latitudInicial, String longitudInicial, String latitudFinal, String longitudFinal) {

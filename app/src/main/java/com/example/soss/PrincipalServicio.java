@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.soss.Adapters.EmpresaAdapter;
-import com.example.soss.Clases.ClsEmpresa;
+import com.example.soss.Model.ClsEmpresa;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,8 +23,8 @@ public class PrincipalServicio extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private EmpresaAdapter adaptador;
-    private ArrayList<ClsEmpresa> misdatos;
+    private EmpresaAdapter AdaptadorEmpresa;
+    private ArrayList<ClsEmpresa> ListaEmpresa;
     private static final String PATH_SERVICIO = "Empresa";
     DatabaseReference reference;
 
@@ -35,37 +35,36 @@ public class PrincipalServicio extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rcvListaServicios);
         reference = FirebaseDatabase.getInstance().getReference(PATH_SERVICIO);
-        misdatos = new ArrayList<>();
-        adaptador = new EmpresaAdapter(this, misdatos);
-        recyclerView.setAdapter(adaptador);
+        ListaEmpresa = new ArrayList<>();
+        AdaptadorEmpresa = new EmpresaAdapter(this, ListaEmpresa);
+        recyclerView.setAdapter(AdaptadorEmpresa);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        ListarEmpresa();
+        ListarEmpresas();
     }
 
-    void ListarEmpresa() {
+    void ListarEmpresas() {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ClsEmpresa servicio = dataSnapshot.getValue(ClsEmpresa.class);
-                servicio.setIdEmpresa(dataSnapshot.getKey());
-                if (!misdatos.contains(servicio)) {
-                    misdatos.add(servicio);
+                ClsEmpresa empresa = dataSnapshot.getValue(ClsEmpresa.class);
+                empresa.setIdEmpresa(dataSnapshot.getKey());
+                if (!ListaEmpresa.contains(empresa)) {
+                    ListaEmpresa.add(empresa);
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ClsEmpresa servicio = dataSnapshot.getValue(ClsEmpresa.class);
-                servicio.setIdEmpresa(dataSnapshot.getKey());
+                ClsEmpresa empresa = dataSnapshot.getValue(ClsEmpresa.class);
+                empresa.setIdEmpresa(dataSnapshot.getKey());
                 int index = -1;
-                for (ClsEmpresa servi : misdatos) {
-                    Log.i("iteracion", servi.getIdEmpresa() + " = " + servicio.getIdEmpresa());
+                for (ClsEmpresa objempresa : ListaEmpresa) {
+                    Log.i("iteracion", objempresa.getIdEmpresa() + " = " + empresa.getIdEmpresa());
                     index++;
-                    if (servi.getIdEmpresa().equals(servicio.getIdEmpresa())) {
-                        misdatos.set(index, servicio);
+                    if (objempresa.getIdEmpresa().equals(empresa.getIdEmpresa())) {
+                        ListaEmpresa.set(index, empresa);
                         break;
                     }
                 }
@@ -74,14 +73,14 @@ public class PrincipalServicio extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                ClsEmpresa servicio = dataSnapshot.getValue(ClsEmpresa.class);
-                servicio.setIdEmpresa(dataSnapshot.getKey());
+                ClsEmpresa empresa = dataSnapshot.getValue(ClsEmpresa.class);
+                empresa.setIdEmpresa(dataSnapshot.getKey());
                 int index = -1;
-                for (ClsEmpresa servi : misdatos) {
-                    Log.i("iteracion", servi.getIdEmpresa() + " = " + servicio.getIdEmpresa());
+                for (ClsEmpresa objempresa : ListaEmpresa) {
+                    Log.i("iteracion", objempresa.getIdEmpresa() + " = " + empresa.getIdEmpresa());
                     index++;
-                    if (servi.getIdEmpresa().equals(servicio.getIdEmpresa())) {
-                        misdatos.remove(index);
+                    if (objempresa.getIdEmpresa().equals(empresa.getIdEmpresa())) {
+                        ListaEmpresa.remove(index);
                         break;
                     }
                 }

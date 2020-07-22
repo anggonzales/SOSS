@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.soss.Clases.ClsServicio;
+import com.example.soss.Model.ClsServicio;
 import com.example.soss.R;
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHolder> {
 
     private LayoutInflater inflador;
-    ArrayList<ClsServicio> datos;
+    ArrayList<ClsServicio> ListaServicios;
     Context micontext;
 
     public ServicioAdapter(Context context, ArrayList<ClsServicio> datos) {
-        this.datos = datos;
+        this.ListaServicios = datos;
         micontext = context;
         inflador = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -34,8 +34,8 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int i) {
-        holder.NombreServicio.setText(datos.get(i).getNombre());
-        holder.Precio.setText("Costo : S/ " + datos.get(i).getPrecio());
+        holder.NombreServicio.setText(ListaServicios.get(i).getNombre());
+        holder.Precio.setText("Costo : S/ " + ListaServicios.get(i).getPrecio());
         holder.Pagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,13 +46,13 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return datos.size();
+        return ListaServicios.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView NombreServicio;
         public TextView Precio;
-        public Button Pagar;
+        public Button   Pagar;
 
         ViewHolder(View itemView) {
             super(itemView);

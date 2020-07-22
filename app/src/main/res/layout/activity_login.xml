@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
+    android:background="@drawable/login2"
     tools:context=".Login">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_marginBottom="130dp"
         android:text="INICIAR SESIÓN"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="#fff"
+        android:textColor="@color/colorPrimary"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/edtusu"

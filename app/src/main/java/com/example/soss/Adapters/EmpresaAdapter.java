@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.soss.Clases.ClsEmpresa;
+import com.example.soss.Model.ClsEmpresa;
 import com.example.soss.DetalleServicio;
 import com.example.soss.R;
 import com.example.soss.UbicacionServicio;
@@ -20,11 +20,11 @@ import java.util.ArrayList;
 public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHolder> {
 
     private LayoutInflater inflador;
-    ArrayList<ClsEmpresa> datos;
+    ArrayList<ClsEmpresa> ListaEmpresas;
     Context micontext;
 
     public EmpresaAdapter(Context context, ArrayList<ClsEmpresa> datos) {
-        this.datos = datos;
+        this.ListaEmpresas = datos;
         micontext = context;
         inflador = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +39,7 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int i) {
 
-        holder.NombreEmpresa.setText(datos.get(i).getNombre());
+        holder.NombreEmpresa.setText(ListaEmpresas.get(i).getNombre());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +47,9 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(micontext, UbicacionServicio.class);
                 //intent.putExtra("id", datos.get(i).getId());
-                intent.putExtra("Nombre", datos.get(i).getNombre());
-                intent.putExtra("Latitud", datos.get(i).getLatitud());
-                intent.putExtra("Longitud", datos.get(i).getLongitud());
+                intent.putExtra("Nombre", ListaEmpresas.get(i).getNombre());
+                intent.putExtra("Latitud", ListaEmpresas.get(i).getLatitud());
+                intent.putExtra("Longitud", ListaEmpresas.get(i).getLongitud());
                 micontext.startActivity(intent);
             }
         });
@@ -58,7 +58,7 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(micontext, DetalleServicio.class);
-                intent.putExtra("IdEmpresa", datos.get(i).getIdEmpresa());
+                intent.putExtra("IdEmpresa", ListaEmpresas.get(i).getIdEmpresa());
                 micontext.startActivity(intent);
             }
         });
@@ -66,7 +66,7 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return datos.size();
+        return ListaEmpresas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
