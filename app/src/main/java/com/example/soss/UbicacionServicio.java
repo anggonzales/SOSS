@@ -142,7 +142,7 @@ public class UbicacionServicio extends AppCompatActivity implements OnMapReadyCa
 
     private void webServiceObtenerRuta(String latitudInicial, String longitudInicial, String latitudFinal, String longitudFinal) {
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + latitudInicial + "," + longitudInicial
-                + "&destination=" + latitudFinal + "," + longitudFinal + "&key=AIzaSyBdx5zxdh_jmhC_7H4tMrK-YeiQDlD-OG8";
+                + "&destination=" + latitudFinal + "," + longitudFinal + "&key=AIzaSyBNiVf97pw9rbPMkGlPMDhlnx8UijRDIqQ";
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

@@ -6,17 +6,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.soss.Adapters.ServicioAdapter;
+import com.example.soss.Config.Config;
 import com.example.soss.Model.ClsServicio;
+import com.example.soss.Model.PaymentDetails;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -37,6 +49,7 @@ public class DetalleServicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_servicio);
+
         recyclerView = findViewById(R.id.rcvListaServicioEmpresa);
 
         reference = FirebaseDatabase.getInstance().getReference(PATH_SERVICIOS);
@@ -50,12 +63,12 @@ public class DetalleServicio extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         IdEmpresa =  extras.getString("IdEmpresa");
 
+
         consulta = FirebaseDatabase.getInstance().getReference("Servicio")
                 .orderByChild("IdEmpresa")
                 .equalTo(IdEmpresa);
 
         ListarServicios();
-
     }
 
     void ListarServicios(){
