@@ -68,12 +68,12 @@ public class Login extends AppCompatActivity {
         else if(TextUtils.isEmpty(password)){
             edtPassword.setError("campo requerido");
         }
-        else{
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        else {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         String userUID = mAuth.getCurrentUser().getUid();
                         String userDeviceToken = FirebaseInstanceId.getInstance().getToken();
 
@@ -83,16 +83,13 @@ public class Login extends AppCompatActivity {
                                 checkVerifiedEmail();
                             }
                         });
-                    }
-                    else{
+                    } else {
                         Toast.makeText(Login.this, "Verifique su Email", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
         }
-
-
     }
     private void checkVerifiedEmail() {
         user = mAuth.getCurrentUser();

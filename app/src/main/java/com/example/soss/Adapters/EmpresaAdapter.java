@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.soss.DetalleEmpresa;
 import com.example.soss.Model.ClsEmpresa;
 import com.example.soss.DetalleServicio;
 import com.example.soss.R;
@@ -45,11 +46,13 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(micontext, UbicacionServicio.class);
+                Intent intent = new Intent(micontext, DetalleEmpresa.class);
                 //intent.putExtra("id", datos.get(i).getId());
+
                 intent.putExtra("Nombre", ListaEmpresas.get(i).getNombre());
                 intent.putExtra("Latitud", ListaEmpresas.get(i).getLatitud());
                 intent.putExtra("Longitud", ListaEmpresas.get(i).getLongitud());
+
                 micontext.startActivity(intent);
             }
         });
