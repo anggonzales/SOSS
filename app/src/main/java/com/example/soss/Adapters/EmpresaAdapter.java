@@ -48,7 +48,7 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(micontext, DetalleEmpresa.class);
                 //intent.putExtra("id", datos.get(i).getId());
-
+                intent.putExtra("IdEmpresa", ListaEmpresas.get(i).getIdEmpresa());
                 intent.putExtra("Nombre", ListaEmpresas.get(i).getNombre());
                 intent.putExtra("Latitud", ListaEmpresas.get(i).getLatitud());
                 intent.putExtra("Longitud", ListaEmpresas.get(i).getLongitud());

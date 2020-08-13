@@ -8,7 +8,24 @@ public class ClsEmpresa {
     private String Nombre;
     private String Latitud;
     private String Longitud;
+    private Double RatingTotal;
+    private Long RatingConteo;
 
+    public Double getRatingTotal() {
+        return RatingTotal;
+    }
+
+    public void setRatingTotal(Double ratingTotal) {
+        RatingTotal = ratingTotal;
+    }
+
+    public Long getRatingConteo() {
+        return RatingConteo;
+    }
+
+    public void setRatingConteo(Long ratingConteo) {
+        RatingConteo = ratingConteo;
+    }
 
     public ClsEmpresa() {
     }
