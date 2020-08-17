@@ -52,6 +52,7 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
                 intent.putExtra("Nombre", ListaEmpresas.get(i).getNombre());
                 intent.putExtra("Latitud", ListaEmpresas.get(i).getLatitud());
                 intent.putExtra("Longitud", ListaEmpresas.get(i).getLongitud());
+                intent.putExtra("Calificacion", ListaEmpresas.get(i).getRatingTotal());
 
                 micontext.startActivity(intent);
             }
