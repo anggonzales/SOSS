@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.example.soss.Adapters.EmpresaAdapter;
 import com.example.soss.Model.ClsEmpresa;
@@ -27,6 +30,7 @@ public class PrincipalServicio extends AppCompatActivity {
     private ArrayList<ClsEmpresa> ListaEmpresa;
     private static final String PATH_SERVICIO = "Empresa";
     DatabaseReference reference;
+    private EditText edtbuscarnombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,36 @@ public class PrincipalServicio extends AppCompatActivity {
         recyclerView.setAdapter(AdaptadorEmpresa);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        edtbuscarnombre = (EditText)findViewById(R.id.edtBusqueda);
+        edtbuscarnombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // searchPeopleProfile(etbuscarnombre.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filtrar(s.toString());
+            }
+        });
+
         ListarEmpresas();
+    }
+
+    private void filtrar(String texto) {
+        ArrayList<ClsEmpresa> filtradatos = new ArrayList<>();
+
+        for(ClsEmpresa item : ListaEmpresa){
+            if (item.getNombre().contains(texto)){
+                filtradatos.add(item);
+            }
+            AdaptadorEmpresa.filtrar(filtradatos);
+        }
     }
 
     void ListarEmpresas() {

@@ -23,6 +23,7 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
     private LayoutInflater inflador;
     ArrayList<ClsEmpresa> ListaEmpresas;
     Context micontext;
+    ViewHolder viewHolder;
 
     public EmpresaAdapter(Context context, ArrayList<ClsEmpresa> datos) {
         this.ListaEmpresas = datos;
@@ -35,6 +36,25 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = inflador.inflate(R.layout.item_principal_servicio, parent, false);
         return new ViewHolder(v);
+    }
+
+    public View getView (final int position, View convertView, ViewGroup parent){
+
+        if(convertView == null) {
+
+            convertView = inflador.inflate(R.layout.item_principal_servicio, parent, false);
+            viewHolder.NombreEmpresa = (TextView) convertView.findViewById(R.id.txtNombre);
+            convertView.setTag(viewHolder);
+        } else{
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.NombreEmpresa.setText(ListaEmpresas.get(position).getNombre());
+        return convertView;
+    }
+
+    public  void filtrar(ArrayList<ClsEmpresa> filtro){
+        this.ListaEmpresas = filtro;
+        notifyDataSetChanged();
     }
 
     @Override

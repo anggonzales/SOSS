@@ -57,7 +57,7 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
             public void onClick(View v) {
                 String monto = (String) ListaServicios.get(i).getPrecio();
                 PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(monto)), "USD", "",
-                PayPalPayment.PAYMENT_INTENT_SALE);
+                        PayPalPayment.PAYMENT_INTENT_SALE);
                 Intent intent = new Intent(micontext, PaymentActivity.class);
                 intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
                 intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);

@@ -18,7 +18,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
 
     private LayoutInflater inflador;
     ArrayList<ClsCategoria> ListaCategoria;
-    ArrayList<ClsCategoria> ListaCategoriaUsuario = new ArrayList<>();
+    public static ArrayList<ClsCategoria> ListaCategoriaChecked = new ArrayList<>();
     Context micontext;
 
     public CategoriaAdapter(Context context, ArrayList<ClsCategoria> datos) {
@@ -35,10 +35,28 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(CategoriaAdapter.ViewHolder holder, final int i) {
-
+    public void onBindViewHolder(ViewHolder holder, final int i) {
+        //holder.Categorias.setText(ListaCategoria.get(i).getNombre());
+        //holder.NombreCategoria.setChecked(ListaCategoria.get(i).isSelected());
         holder.Categorias.setText(ListaCategoria.get(i).getNombre());
+        holder.NombreCategoria.setChecked(ListaCategoria.get(i).isSelected());
 
+
+        holder.setItemClickListener(new ViewHolder.ItemClickListener(){
+            public void onItemClick(View v, int pos){
+                CheckBox NombreCategoria = (CheckBox) v;
+                ClsCategoria current = ListaCategoria.get(i);
+
+                if(NombreCategoria.isChecked()){
+                    current.setSelected(true);
+                    ListaCategoriaChecked.add(current);
+
+                } else if (!NombreCategoria.isChecked()) {
+                    current.setSelected(false);
+                    ListaCategoriaChecked.remove(current);
+                }
+            }
+        });
     }
 
     @Override
@@ -46,19 +64,29 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
         return ListaCategoria.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CheckBox NombreCategoria;
         public TextView Categorias;
+        ItemClickListener itemClickListener;
 
         ViewHolder(View itemView) {
             super(itemView);
             NombreCategoria = (CheckBox) itemView.findViewById(R.id.chkCategoria);
             Categorias = (TextView) itemView.findViewById(R.id.txtNombreCategoria);
-
+            NombreCategoria.setOnClickListener(this);
         }
-    }
 
-    interface OnItemCheckListener {
-        void onItemCheck(View v, int pos);
+        public void setItemClickListener(ItemClickListener ic) {
+            this.itemClickListener = ic;
+        }
+
+        @Override
+        public void onClick(View v) {
+            this.itemClickListener.onItemClick(v, getLayoutPosition());
+        }
+
+        interface ItemClickListener {
+            void onItemClick(View v, int pos);
+        }
     }
 }

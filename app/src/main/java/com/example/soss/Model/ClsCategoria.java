@@ -5,10 +5,14 @@ public class ClsCategoria {
     private String id;
     private String Nombre;
     private String Descripcion;
+    private boolean isSelected;
 
     public ClsCategoria() {
     }
 
+    public ClsCategoria(String nombre) {
+        Nombre = nombre;
+    }
 
     public String getId() {
         return id;
@@ -40,5 +44,13 @@ public class ClsCategoria {
 
     public void setDescripcion(String descripcion) {
         Descripcion = descripcion;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

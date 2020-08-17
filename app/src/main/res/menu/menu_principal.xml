@@ -10,9 +10,9 @@
         <item android:title="Consultar Servicios"
             android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
             android:id="@+id/activity_consulta_servicios"/>
-        <item android:title="Acerca de"
+        <item android:title="Pagos realizados"
             android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
-            android:id="@+id/activity_acerca"/>
+            android:id="@+id/activity_pago"/>
         <item android:title="Categorias"
             android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
             android:id="@+id/activity_categoria"/>

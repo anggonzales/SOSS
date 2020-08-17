@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetalleEmpresa"></activity>
+        <activity android:name=".PrincipalPago"></activity>
+        <activity android:name=".DetallePago" />
+        <activity android:name=".DetalleEmpresa" />
         <activity android:name=".CategoriaUsuario" />
         <activity android:name=".PagoServicio" />
         <activity android:name=".UbicacionServicio" />
