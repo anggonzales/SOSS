@@ -12,20 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.soss.DetalleEmpresa;
 import com.example.soss.Model.ClsEmpresa;
-import com.example.soss.DetalleServicio;
 import com.example.soss.R;
-import com.example.soss.UbicacionServicio;
 
 import java.util.ArrayList;
 
-public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHolder> {
+public class SugerenciaAdapter extends RecyclerView.Adapter<SugerenciaAdapter.ViewHolder> {
 
     private LayoutInflater inflador;
     ArrayList<ClsEmpresa> ListaEmpresas;
     Context micontext;
     ViewHolder viewHolder;
 
-    public EmpresaAdapter(Context context, ArrayList<ClsEmpresa> datos) {
+    public SugerenciaAdapter(Context context, ArrayList<ClsEmpresa> datos) {
         this.ListaEmpresas = datos;
         micontext = context;
         inflador = (LayoutInflater) context
@@ -38,31 +36,10 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
         return new ViewHolder(v);
     }
 
-    public View getView (final int position, View convertView, ViewGroup parent){
-
-        if(convertView == null) {
-
-            convertView = inflador.inflate(R.layout.item_principal_servicio, parent, false);
-            viewHolder.NombreEmpresa = (TextView) convertView.findViewById(R.id.txtNombre);
-            convertView.setTag(viewHolder);
-        } else{
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-        viewHolder.NombreEmpresa.setText(ListaEmpresas.get(position).getNombre());
-        return convertView;
-    }
-
-    public  void filtrar(ArrayList<ClsEmpresa> filtro){
-        this.ListaEmpresas = filtro;
-        notifyDataSetChanged();
-    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int i) {
-
         holder.NombreEmpresa.setText(ListaEmpresas.get(i).getNombre());
-
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +64,7 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView NombreEmpresa;
         public TextView InicialLogo;
+        public Button Servicio;
 
         ViewHolder(View itemView) {
             super(itemView);

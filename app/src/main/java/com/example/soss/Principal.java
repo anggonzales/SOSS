@@ -1,6 +1,7 @@
 package com.example.soss;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,15 +11,34 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.soss.Adapters.SugerenciaAdapter;
+import com.example.soss.Model.ClsEmpresa;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class Principal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private SugerenciaAdapter AdaptadorSugerencia;
+    private ArrayList<ClsEmpresa> ListaEmpresa;
+    private static final String PATH_SERVICIO = "Empresa";
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +59,74 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /* Listado de servicios sugeridos */
+        recyclerView = findViewById(R.id.rcvListaServicios);
+        reference = FirebaseDatabase.getInstance().getReference(PATH_SERVICIO);
+        ListaEmpresa = new ArrayList<>();
+        AdaptadorSugerencia = new SugerenciaAdapter(this, ListaEmpresa);
+        recyclerView.setAdapter(AdaptadorSugerencia);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        ListarEmpresas();
+
     }
+
+    void ListarEmpresas() {
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                ClsEmpresa empresa = dataSnapshot.getValue(ClsEmpresa.class);
+                empresa.setIdEmpresa(dataSnapshot.getKey());
+                if (!ListaEmpresa.contains(empresa)) {
+                    ListaEmpresa.add(empresa);
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                ClsEmpresa empresa = dataSnapshot.getValue(ClsEmpresa.class);
+                empresa.setIdEmpresa(dataSnapshot.getKey());
+                int index = -1;
+                for (ClsEmpresa objempresa : ListaEmpresa) {
+                    Log.i("iteracion", objempresa.getIdEmpresa() + " = " + empresa.getIdEmpresa());
+                    index++;
+                    if (objempresa.getIdEmpresa().equals(empresa.getIdEmpresa())) {
+                        ListaEmpresa.set(index, empresa);
+                        break;
+                    }
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                ClsEmpresa empresa = dataSnapshot.getValue(ClsEmpresa.class);
+                empresa.setIdEmpresa(dataSnapshot.getKey());
+                int index = -1;
+                for (ClsEmpresa objempresa : ListaEmpresa) {
+                    Log.i("iteracion", objempresa.getIdEmpresa() + " = " + empresa.getIdEmpresa());
+                    index++;
+                    if (objempresa.getIdEmpresa().equals(empresa.getIdEmpresa())) {
+                        ListaEmpresa.remove(index);
+                        break;
+                    }
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
