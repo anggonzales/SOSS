@@ -10,6 +10,7 @@ public class ClsEmpresa {
     private String Longitud;
     private Double RatingTotal;
     private Long RatingConteo;
+    private String Celular;
 
     public Double getRatingTotal() {
         return RatingTotal;
@@ -85,5 +86,13 @@ public class ClsEmpresa {
 
     public void setLongitud(String longitud) {
         Longitud = longitud;
+    }
+
+    public String getCelular() {
+        return Celular;
+    }
+
+    public void setCelular(String celular) {
+        Celular = celular;
     }
 }
