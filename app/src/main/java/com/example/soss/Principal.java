@@ -77,8 +77,10 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ClsEmpresa empresa = dataSnapshot.getValue(ClsEmpresa.class);
                 empresa.setIdEmpresa(dataSnapshot.getKey());
+
                 if (!ListaEmpresa.contains(empresa)) {
-                    ListaEmpresa.add(empresa);
+                    if (empresa.getRatingTotal()>=3)
+                        ListaEmpresa.add(empresa);
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
