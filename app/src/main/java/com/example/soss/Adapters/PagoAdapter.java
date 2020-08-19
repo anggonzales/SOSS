@@ -37,9 +37,9 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int i) {
 
         holder.txtId.setText(ListaPagoServicio.get(i).getId());
-        holder.txtPrecio.setText(Double.toString(ListaPagoServicio.get(i).getPrecio()));
-        holder.txtEstado.setText(ListaPagoServicio.get(i).getEstado());
-        holder.txtFecha.setText(String.valueOf(ListaPagoServicio.get(i).getFecha()));
+        holder.txtPrecio.setText("Precio : " + Double.toString(ListaPagoServicio.get(i).getPrecio()));
+        holder.txtEstado.setText("Estado : " + ListaPagoServicio.get(i).getEstado());
+        holder.txtFecha.setText("Fecha : " + String.valueOf(ListaPagoServicio.get(i).getFecha()));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
             txtId = (TextView) itemView.findViewById(R.id.txtId);
             txtPrecio = (TextView) itemView.findViewById(R.id.txtPrecio);
             txtEstado = (TextView) itemView.findViewById(R.id.txtEstado);
-            txtFecha = (TextView) itemView.findViewById(R.id.txtFecha);
+            txtFecha = (TextView) itemView.findViewById(R.id.txtFetch);
         }
     }
 }

@@ -5,6 +5,7 @@ public class ClsPagoServicio {
     private String IdPago;
     private String IdUsuario;
     private Double Precio;
+    private String NombreServicio;
     private String Fecha;
     private String Estado;
 
@@ -14,6 +15,14 @@ public class ClsPagoServicio {
     public ClsPagoServicio(String idUsuario, Double precio, String fecha, String estado) {
         IdUsuario = idUsuario;
         Precio = precio;
+        Fecha = fecha;
+        Estado = estado;
+    }
+
+    public ClsPagoServicio(String idUsuario, Double precio, String nombreServicio, String fecha, String estado) {
+        IdUsuario = idUsuario;
+        Precio = precio;
+        NombreServicio = nombreServicio;
         Fecha = fecha;
         Estado = estado;
     }
@@ -64,5 +73,13 @@ public class ClsPagoServicio {
 
     public void setEstado(String estado) {
         Estado = estado;
+    }
+
+    public String getNombreServicio() {
+        return NombreServicio;
+    }
+
+    public void setNombreServicio(String nombreServicio) {
+        NombreServicio = nombreServicio;
     }
 }

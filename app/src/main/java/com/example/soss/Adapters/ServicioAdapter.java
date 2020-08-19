@@ -71,6 +71,7 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
             public void onClick(View v) {
                 Intent intent = new Intent(micontext, PagoServicio.class);
                 intent.putExtra("Precio", ListaServicios.get(i).getPrecio());
+                intent.putExtra("Nombre", ListaServicios.get(i).getNombre());
                 micontext.startActivity(intent);
             }
         });

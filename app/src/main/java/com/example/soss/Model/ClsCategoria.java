@@ -53,4 +53,9 @@ public class ClsCategoria {
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
+
+    @Override
+    public String toString(){
+        return this.getNombre();
+    }
 }

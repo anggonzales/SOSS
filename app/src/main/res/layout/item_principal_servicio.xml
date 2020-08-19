@@ -61,7 +61,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textSize="14sp"
-                android:text="5.0"
+                android:text=""
                 android:textColor="@color/colorWhite" />
 
             <View

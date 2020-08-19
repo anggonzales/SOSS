@@ -40,10 +40,12 @@ public class PagoServicio extends AppCompatActivity {
             .clientId(Config.PAYPAL_CLIENT_ID);
 
     TextView txtCambio;
+    TextView txtNombreServicio;
     EditText edtMonto;
     EditText edtMontoCambio;
     Button btnPagar;
     String Precio = "";
+    String Nombre = "";
     String monto = "";
     double monto2 = 0;
 
@@ -64,11 +66,14 @@ public class PagoServicio extends AppCompatActivity {
         edtMonto = (EditText) findViewById(R.id.edtMonto);
         txtCambio = (TextView) findViewById(R.id.txtCambio);
         edtMontoCambio = (EditText) findViewById(R.id.edtMontoCambio);
+        txtNombreServicio = (TextView) findViewById(R.id.txtNombreServicio);
 
         Bundle extras = getIntent().getExtras();
         Precio = extras.getString("Precio");
+        Nombre = extras.getString("Nombre");
 
         edtMonto.setText(Precio);
+        txtNombreServicio.setText(Nombre);
         ObtenerCambio();
 
         btnPagar.setOnClickListener(new View.OnClickListener() {
