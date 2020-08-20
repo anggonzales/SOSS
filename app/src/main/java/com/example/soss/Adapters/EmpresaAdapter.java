@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,11 +45,16 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
 
             convertView = inflador.inflate(R.layout.item_principal_servicio, parent, false);
             viewHolder.NombreEmpresa = (TextView) convertView.findViewById(R.id.txtNombre);
+            /*viewHolder.DescripcionEmpresa =  (TextView) convertView.findViewById(R.id.txtDescripcion);
+            viewHolder.CalificacionEmpresa =(TextView) convertView.findViewById(R.id.idPuntajetexto);*/
+
             convertView.setTag(viewHolder);
         } else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.NombreEmpresa.setText(ListaEmpresas.get(position).getNombre());
+      /*  viewHolder.DescripcionEmpresa.setText(ListaEmpresas.get(position).getDescripcion());
+        viewHolder.CalificacionEmpresa.setText(ListaEmpresas.get(position).getRatingTotal().toString());*/
         return convertView;
     }
 
@@ -61,6 +67,9 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, final int i) {
 
         holder.NombreEmpresa.setText(ListaEmpresas.get(i).getNombre());
+        //holder.DescripcionEmpresa.setText(ListaEmpresas.get(i).getDescripcion());
+        holder.CalificacionEmpresa.setText(ListaEmpresas.get(i).getRatingTotal().toString());
+        holder.rbEmpresa.setRating((float) Double.parseDouble(ListaEmpresas.get(i).getRatingTotal().toString()));
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -86,12 +95,18 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView NombreEmpresa;
+        public TextView DescripcionEmpresa;
+        public TextView CalificacionEmpresa;
         public TextView InicialLogo;
+        public RatingBar rbEmpresa;
 
         ViewHolder(View itemView) {
             super(itemView);
             NombreEmpresa = (TextView) itemView.findViewById(R.id.txtNombre);
+          //  DescripcionEmpresa = (TextView) itemView.findViewById(R.id.txtDescripcion);
+            CalificacionEmpresa =(TextView) itemView.findViewById(R.id.idPuntajetexto);
             InicialLogo = (TextView) itemView.findViewById(R.id.txtLogo);
+            rbEmpresa = (RatingBar) itemView.findViewById(R.id.item_empresa_ratingbar);
         }
     }
 }

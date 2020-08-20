@@ -32,7 +32,7 @@ public class SugerenciaAdapter extends RecyclerView.Adapter<SugerenciaAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflador.inflate(R.layout.item_principal_servicio, parent, false);
+        View v = inflador.inflate(R.layout.item_popular, parent, false);
         return new ViewHolder(v);
     }
 
@@ -63,13 +63,13 @@ public class SugerenciaAdapter extends RecyclerView.Adapter<SugerenciaAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView NombreEmpresa;
-        public TextView InicialLogo;
+        //public TextView InicialLogo;
         public Button Servicio;
 
         ViewHolder(View itemView) {
             super(itemView);
-            NombreEmpresa = (TextView) itemView.findViewById(R.id.txtNombre);
-            InicialLogo = (TextView) itemView.findViewById(R.id.txtLogo);
+            NombreEmpresa = (TextView) itemView.findViewById(R.id.txtServicioPopular);
+            //InicialLogo = (TextView) itemView.findViewById(R.id.txtLogo);
         }
     }
 }

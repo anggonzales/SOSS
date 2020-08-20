@@ -11,6 +11,15 @@ public class ClsEmpresa {
     private Double RatingTotal;
     private Long RatingConteo;
     private String Celular;
+    private String Descripcion;
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        Descripcion = descripcion;
+    }
 
     public Double getRatingTotal() {
         return RatingTotal;

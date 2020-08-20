@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -19,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.soss.Adapters.SugerenciaAdapter;
 import com.example.soss.Model.ClsEmpresa;
@@ -39,11 +41,13 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
     private ArrayList<ClsEmpresa> ListaEmpresa;
     private static final String PATH_SERVICIO = "Empresa";
     DatabaseReference reference;
+    CardView cardEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -60,12 +64,19 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
         /* Listado de servicios sugeridos */
-        recyclerView = findViewById(R.id.rcvListaServicios);
+        cardEmpresa = findViewById(R.id.cardEmpresas);
+        cardEmpresa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), PrincipalServicio.class));
+            }
+        });
+       recyclerView = findViewById(R.id.rcvPopular);
         reference = FirebaseDatabase.getInstance().getReference(PATH_SERVICIO);
         ListaEmpresa = new ArrayList<>();
         AdaptadorSugerencia = new SugerenciaAdapter(this, ListaEmpresa);
         recyclerView.setAdapter(AdaptadorSugerencia);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
         ListarEmpresas();
 

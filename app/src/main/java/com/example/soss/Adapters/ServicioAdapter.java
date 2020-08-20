@@ -52,7 +52,7 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
         holder.NombreServicio.setText(ListaServicios.get(i).getNombre());
         holder.Precio.setText("Costo : S/ " + ListaServicios.get(i).getPrecio());
 
-        holder.Pagar.setOnClickListener(new View.OnClickListener() {
+      /*  holder.Pagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String monto = (String) ListaServicios.get(i).getPrecio();
@@ -64,7 +64,7 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
                 //micontext.startActivityForResult(intent, PAYPAL_REQUEST_CODE);
                 intent.putExtra("Precio", ListaServicios.get(i).getPrecio());
             }
-        });
+        });*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,13 +85,13 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView NombreServicio;
         public TextView Precio;
-        public Button   Pagar;
+        //public Button   Pagar;
 
         ViewHolder(View itemView) {
             super(itemView);
             NombreServicio = (TextView) itemView.findViewById(R.id.txtNombre);
             Precio = (TextView) itemView.findViewById(R.id.txtPrecio);
-            Pagar = (Button) itemView.findViewById(R.id.btnPagar);
+            // = (Button) itemView.findViewById(R.id.btnPagar);
         }
     }
 }

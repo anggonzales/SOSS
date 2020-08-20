@@ -17,7 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PrincipalPago"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PrincipalPago" />
         <activity android:name=".DetallePago" />
         <activity android:name=".DetalleEmpresa" />
         <activity android:name=".CategoriaUsuario" />
@@ -28,6 +35,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAg6V9c4ogmuh4h8HXNUL6-L8H-xKTsE0k" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -38,13 +48,14 @@
         <activity android:name=".Slider" />
         <activity android:name=".Registro" />
         <activity android:name=".Login" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <!--<activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>-->
     </application>
 
 </manifest>

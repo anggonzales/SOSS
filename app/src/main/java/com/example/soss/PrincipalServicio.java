@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -67,7 +68,7 @@ public class PrincipalServicio extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference(PATH_SERVICIO);
         referenceCategoria = FirebaseDatabase.getInstance().getReference(PATH_CATEGORIA);
 
-
+      //  spnCategoria = LayoutInflater.from(this).inflate(R.layout.item_spinner,);
         ListarCombo();
 
 
@@ -115,6 +116,7 @@ public class PrincipalServicio extends AppCompatActivity {
                 }
 
                 AdaptadorCategoria = new ClsCategoriaAdapter(PrincipalServicio.this, android.R.layout.simple_dropdown_item_1line, ListaCategorias);
+
                 spnCategoria.setAdapter(AdaptadorCategoria);
 
                 spnCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

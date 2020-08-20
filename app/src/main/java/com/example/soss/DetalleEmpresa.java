@@ -35,11 +35,11 @@ public class DetalleEmpresa extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_empresa);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       /* toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
 
         viewPager = findViewById(R.id.view_pager);
-        tabLayout = findViewById(R.id.tab_layout);
+       tabLayout = findViewById(R.id.tab_layout);
 
         empresaFragment = new EmpresaFragment();
         serviciosFragment = new ServiciosFragment();
@@ -50,14 +50,14 @@ public class DetalleEmpresa extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(empresaFragment, "Inicio");
         viewPagerAdapter.addFragment(serviciosFragment, "Servicios");
-        viewPagerAdapter.addFragment(promocionesFragment, "Publicaciones");
+      //  viewPagerAdapter.addFragment(promocionesFragment, "Publicaciones");
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_room_service_24);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_feedback_24);
+//        tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_feedback_24);
 
-        BadgeDrawable badgeDrawable = tabLayout.getTabAt(2).getOrCreateBadge();
+        BadgeDrawable badgeDrawable = tabLayout.getTabAt(1).getOrCreateBadge();
         badgeDrawable.setVisible(true);
         badgeDrawable.setNumber(5);
 
