@@ -56,9 +56,10 @@ public class EmpresaFragment extends Fragment {
     String longitudservicio;
     String nombreempresa;
     double ratingtotal;
-    String celular;
+    String celular,horario,correo;
+
     String idEmpresa,NombreEmpresa,DescripcionEmpresa;
-    TextView txtPrueba,txtTituloEmpresa;
+    TextView txtPrueba,txtTituloEmpresa,txtCelular,txtHorario,txtCorreo;
     Button btnUbicacion, btnCalificacion;
     RatingBar ratingBarCalificacion ;
     Button btnLlamar;
@@ -115,6 +116,9 @@ public class EmpresaFragment extends Fragment {
         btnChat = (Button)view.findViewById(R.id.btnChat);
        // txtPrueba = (TextView)view.findViewById(R.id.txtPrueba);
         txtTituloEmpresa = (TextView)view.findViewById(R.id.txtTituloEmpresa) ;
+        txtCelular = (TextView)view.findViewById(R.id.celular) ;
+        txtHorario = (TextView)view.findViewById(R.id.horario) ;
+        txtCorreo = (TextView)view.findViewById(R.id.correo) ;
         mAuth = FirebaseAuth.getInstance();
         String IdUser = mAuth.getCurrentUser().getUid();
        // txtPrueba.setText(IdUser);
@@ -126,11 +130,16 @@ public class EmpresaFragment extends Fragment {
         latitudservicio =  extras.getString("Latitud");
         longitudservicio = extras.getString("Longitud");
         nombreempresa = extras.getString("Nombre");
+        correo = extras.getString("Correo");
+        horario = extras.getString("Horario");
         celular = extras.getString("Celular");
         idEmpresa = extras.getString("IdEmpresa");
         ratingtotal = extras.getDouble("Calificacion");
         ratingBarCalificacion.setRating((float) ratingtotal);
         txtTituloEmpresa.setText(nombreempresa);
+        txtCorreo.setText("Correo: " + correo);
+        txtCelular.setText("Celular: " + celular);
+        txtHorario.setText("Horario: " + horario);
 
         btnUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override

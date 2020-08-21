@@ -17,10 +17,10 @@
         <TextView
             android:id="@+id/txttitulo"
             android:layout_width="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_height="wrap_content"
-            android:text="Tipo de cambio"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="Procedimiento de pago"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/colorPrimary"
             android:textSize="22sp" />
@@ -29,17 +29,17 @@
             android:id="@+id/txtCambio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"
-            android:text="Cambio"
+            android:layout_marginTop="50dp"
             android:gravity="right"
+            android:text="Tipo de Cambio:"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/colorPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
             android:id="@+id/txtNombreServicio"

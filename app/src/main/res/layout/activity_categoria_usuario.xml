@@ -17,13 +17,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="¿Cuales son los servicios que más le interesan?"
+            android:layout_gravity="center_horizontal"
             android:textSize="28sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_gravity="center_horizontal"
             android:id="@+id/rcvListaCategorias"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp" />
 
         <Button
@@ -31,6 +35,7 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:text="Guardar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +45,7 @@
             app:layout_constraintVertical_bias="0.969" />
 
         <Button
+            android:layout_gravity="center_horizontal"
             android:id="@+id/btnOmitir"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="110dp"
